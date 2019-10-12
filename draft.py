@@ -11,145 +11,161 @@ from colorama import Fore
 from colorama import Style
 
 
+def unique(allyPickList, allPicksPlayer, allPicks1, allPicks2, allPicks3, allPicks4):
+    for pick in allyPickList:
+        if(allPicksPlayer["Champion"].str.contains(pick).any() and not allPicks1["Champion"].str.contains(pick).any() and not allPicks2["Champion"].str.contains(pick).any() and not allPicks3["Champion"].str.contains(pick).any() and not allPicks4["Champion"].str.contains(pick).any()):
+           return True
+    return False
+
 def displayPotentialPicks(champTable, pickList, banList, players):
-    champFilter = champTable.Champion.str.contains('|'.join(pickList+banList))
+    champFilter = champTable.Champion.str.contains('|'.join(pickList[0] + pickList[1] +banList))
     potentialPicks = champTable[[not x for x in champFilter]]
     
+    poolP1 = champTable[champTable[players[0]]<4]
     allPicksP1 = potentialPicks[potentialPicks[players[0]]<4]
     availableSP1 = potentialPicks[potentialPicks[players[0]]==1]
     availableAP1 = potentialPicks[potentialPicks[players[0]]==2]
     availableBP1 = potentialPicks[potentialPicks[players[0]]==3]
     
+    poolP2 = champTable[champTable[players[1]]<4]
     allPicksP2 = potentialPicks[potentialPicks[players[1]]<4]
     availableSP2 = potentialPicks[potentialPicks[players[1]]==1]
     availableAP2 = potentialPicks[potentialPicks[players[1]]==2]
     availableBP2 = potentialPicks[potentialPicks[players[1]]==3]
     
+    poolP3 = champTable[champTable[players[2]]<4]
     allPicksP3 = potentialPicks[potentialPicks[players[2]]<4]
     availableSP3 = potentialPicks[potentialPicks[players[2]]==1]
     availableAP3 = potentialPicks[potentialPicks[players[2]]==2]
     availableBP3 = potentialPicks[potentialPicks[players[2]]==3]
     
+    poolP4 = champTable[champTable[players[3]]<4]
     allPicksP4 = potentialPicks[potentialPicks[players[3]]<4]
     availableSP4 = potentialPicks[potentialPicks[players[3]]==1]
     availableAP4 = potentialPicks[potentialPicks[players[3]]==2]
     availableBP4 = potentialPicks[potentialPicks[players[3]]==3]
     
+    poolP5 = champTable[champTable[players[4]]<4]
     allPicksP5 = potentialPicks[potentialPicks[players[4]]<4]
     availableSP5 = potentialPicks[potentialPicks[players[4]]==1]
     availableAP5 = potentialPicks[potentialPicks[players[4]]==2]
     availableBP5 = potentialPicks[potentialPicks[players[4]]==3]
-    
+       
 
    #really just a bunch of print statements to print each players picks, highlighted if flex
    #pprobably would have been faster to get a list of flex picks first, but I just checked every time b/c it works
-    
+     
     print()
     print()
     print("OPEN PICKS: \n")
-    print("\u0332".join(players[0]))
-    print("S Tier: ", end = "")
-    for x in availableSP1["Champion"]:
-        if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")
-    print("\nA Tier: ", end = "")
-    for x in availableAP1["Champion"]:
-        if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")
-    print("\nB Tier: ", end = "")
-    for x in availableBP1["Champion"]:
-        if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")    
-    print()
-    print()
-    print("\u0332".join(players[1]))
-    print("S Tier: ", end = "")
-    for x in availableSP2["Champion"]:
-        if(allPicksP1["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")
-    print("\nA Tier: ", end = "")
-    for x in availableAP2["Champion"]:
-        if(allPicksP1["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")
-    print("\nB Tier: ", end = "")
-    for x in availableBP2["Champion"]:
-        if(allPicksP1["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")
-    print()
-    print()
-    print("\u0332".join(players[2]))
-    print("S Tier: ", end = "")
-    for x in availableSP3["Champion"]:
-        if(allPicksP2["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")
-    print("\nA Tier: ", end = "")
-    for x in availableAP3["Champion"]:
-        if(allPicksP2["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")
-    print("\nB Tier: ", end = "")
-    for x in availableBP3["Champion"]:
-        if(allPicksP2["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")
-    print()
-    print()
-    print("\u0332".join(players[3]))
-    print("S Tier: ", end = "")
-    for x in availableSP4["Champion"]:
-        if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")
-    print("\nA Tier: ", end = "")
-    for x in availableAP4["Champion"]:
-        if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")
-    print("\nB Tier: ", end = "")
-    for x in availableBP4["Champion"]:
-        if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")
-    print()
-    print()
-    print("\u0332".join(players[4]))
-    print("S Tier: ", end = "")
-    for x in availableSP5["Champion"]:
-        if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")
-    print("\nA Tier: ", end = "")
-    for x in availableAP5["Champion"]:
-        if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")
-    print("\nB Tier: ", end = "")
-    for x in availableBP5["Champion"]:
-        if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any()):
-            print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
-        else:
-            print(x, end = " ")
+    if(not unique(pickList[0], poolP1, poolP2, poolP3, poolP4, poolP5)):
+        print("\u0332".join(players[0]))
+        print("S Tier: ", end = "")
+        for x in availableSP1["Champion"]:
+            if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")
+        print("\nA Tier: ", end = "")
+        for x in availableAP1["Champion"]:
+            if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")
+        print("\nB Tier: ", end = "")
+        for x in availableBP1["Champion"]:
+            if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")    
+        print()
+        print()
+    if(not unique(pickList[0], poolP2, poolP1, poolP3, poolP4, poolP5)):
+        print("\u0332".join(players[1]))
+        print("S Tier: ", end = "")
+        for x in availableSP2["Champion"]:
+            if(allPicksP1["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")
+        print("\nA Tier: ", end = "")
+        for x in availableAP2["Champion"]:
+            if(allPicksP1["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")
+        print("\nB Tier: ", end = "")
+        for x in availableBP2["Champion"]:
+            if(allPicksP1["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")
+        print()
+        print()
+    if(not unique(pickList[0], poolP3, poolP2, poolP1, poolP4, poolP5)):
+        print("\u0332".join(players[2]))
+        print("S Tier: ", end = "")
+        for x in availableSP3["Champion"]:
+            if(allPicksP2["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")
+        print("\nA Tier: ", end = "")
+        for x in availableAP3["Champion"]:
+            if(allPicksP2["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")
+        print("\nB Tier: ", end = "")
+        for x in availableBP3["Champion"]:
+            if(allPicksP2["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")
+        print()
+        print()
+    if(not unique(pickList[0], poolP4, poolP2, poolP3, poolP1, poolP5)):
+        print("\u0332".join(players[3]))
+        print("S Tier: ", end = "")
+        for x in availableSP4["Champion"]:
+            if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")
+        print("\nA Tier: ", end = "")
+        for x in availableAP4["Champion"]:
+            if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")
+        print("\nB Tier: ", end = "")
+        for x in availableBP4["Champion"]:
+            if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any() or allPicksP5["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")
+        print()
+        print()
+    if(not unique(pickList[0], poolP5, poolP2, poolP3, poolP4, poolP1)):
+        print("\u0332".join(players[4]))
+        print("S Tier: ", end = "")
+        for x in availableSP5["Champion"]:
+            if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")
+        print("\nA Tier: ", end = "")
+        for x in availableAP5["Champion"]:
+            if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")
+        print("\nB Tier: ", end = "")
+        for x in availableBP5["Champion"]:
+            if(allPicksP2["Champion"].str.contains(x).any() or allPicksP3["Champion"].str.contains(x).any() or allPicksP4["Champion"].str.contains(x).any() or allPicksP1["Champion"].str.contains(x).any()):
+                print(Fore.CYAN + x + Style.RESET_ALL, end = " ")
+            else:
+                print(x, end = " ")
     print()
     print()
     
@@ -197,7 +213,7 @@ def readPicksPart2(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" +Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(pick)               
+                pickList[1].append(pick)               
         
         partition = champTable
         
@@ -212,7 +228,7 @@ def readPicksPart2(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" +Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(pick)               
+                pickList[0].append(pick)               
         
         partition = champTable
         
@@ -227,7 +243,7 @@ def readPicksPart2(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" +Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(pick)               
+                pickList[0].append(pick)               
         
         partition = champTable
         
@@ -242,9 +258,9 @@ def readPicksPart2(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" +Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(pick) 
+                pickList[1].append(pick) 
 
-    elif side == "Red": 
+    elif (side == "Red"): 
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
             pick = input("Please enter your fourth pick: ").capitalize()
@@ -256,7 +272,7 @@ def readPicksPart2(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" +Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(pick)               
+                pickList[0].append(pick)               
         
         partition = champTable
         
@@ -271,7 +287,7 @@ def readPicksPart2(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" +Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(pick)               
+                pickList[1].append(pick)               
         
         partition = champTable
         
@@ -286,7 +302,7 @@ def readPicksPart2(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" +Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(pick)               
+                pickList[1].append(pick)               
         
         partition = champTable
         
@@ -301,7 +317,7 @@ def readPicksPart2(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" +Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(pick) 
+                pickList[0].append(pick) 
                 
     return pickList
 
@@ -422,6 +438,8 @@ def readBansPart2(champTable, side, pickList, banList):
 
 def readPicksPart1(champTable, side, pickList, banList, players):
     partition = champTable
+    allyPickList = []
+    enemyPickList = []
     if (side == "Blue"):
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
@@ -434,7 +452,7 @@ def readPicksPart1(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(partition.Champion.iloc[0])               
+                pickList[0].append(partition.Champion.iloc[0])               
         
         partition = champTable
         
@@ -449,7 +467,7 @@ def readPicksPart1(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(partition.Champion.iloc[0])               
+                pickList[1].append(partition.Champion.iloc[0])               
         
         partition = champTable 
         
@@ -464,7 +482,7 @@ def readPicksPart1(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(partition.Champion.iloc[0])               
+                pickList[1].append(partition.Champion.iloc[0])               
         
         partition = champTable
         
@@ -479,7 +497,7 @@ def readPicksPart1(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(partition.Champion.iloc[0])               
+                pickList[0].append(partition.Champion.iloc[0])               
         
         partition = champTable
         
@@ -494,7 +512,7 @@ def readPicksPart1(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(partition.Champion.iloc[0])               
+                pickList[0].append(partition.Champion.iloc[0])               
         
         partition = champTable
         
@@ -509,7 +527,7 @@ def readPicksPart1(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(partition.Champion.iloc[0])               
+                pickList[1].append(partition.Champion.iloc[0])               
         
     if (side== "Red"):
         while (len(partition.Champion) != 1):
@@ -523,7 +541,7 @@ def readPicksPart1(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(partition.Champion.iloc[0])               
+                pickList[1].append(partition.Champion.iloc[0])               
         
         partition = champTable
         
@@ -538,7 +556,7 @@ def readPicksPart1(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(partition.Champion.iloc[0])               
+                pickList[0].append(partition.Champion.iloc[0])               
         
         partition = champTable 
         
@@ -553,7 +571,7 @@ def readPicksPart1(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(partition.Champion.iloc[0])               
+                pickList[0].append(partition.Champion.iloc[0])               
         
         partition = champTable
         
@@ -568,7 +586,7 @@ def readPicksPart1(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(partition.Champion.iloc[0])               
+                pickList[1].append(partition.Champion.iloc[0])               
         
         partition = champTable
         
@@ -583,7 +601,7 @@ def readPicksPart1(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(partition.Champion.iloc[0])               
+                pickList[1].append(partition.Champion.iloc[0])               
         
         partition = champTable
         
@@ -598,8 +616,8 @@ def readPicksPart1(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(partition.Champion.iloc[0])   
-                
+                pickList[0].append(partition.Champion.iloc[0])   
+            
     return pickList
         
 
