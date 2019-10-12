@@ -203,38 +203,31 @@ def readPicksPart2(champTable, side, pickList, banList, players):
         
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
-            twoPicksBlue = []
-            while(len(twoPicksBlue) != 2):
-                twoPicksBlue = input("Please enter your fourth and fifth picks (ie Jayce Gangplank): ").split()
-                pick1 = twoPicksBlue[0].capitalize()
-                if(len(twoPicksBlue) != 2):
-                    print(Fore.YELLOW + "Sorry you entered champion in wrong format" + Style.RESET_ALL)
-                    twoPicksBlue = []
-                    continue
-                else:
-                    pick2 = twoPicksBlue[1].capitalize()
-            partition = partition[searchTable(champTable,pick1)]
+            pick = input("Please enter your fourth pick: ").capitalize()
+            partition = partition[searchTable(champTable,pick)]
             if(len(partition.Champion) != 1):
-                print(Fore.YELLOW + "Sorry " +pick1+ " is not a champion we recognize" + Style.RESET_ALL)
+                print(Fore.YELLOW+ "Sorry that champion name was not recognized" +Style.RESET_ALL)
                 partition = champTable
-                continue
-            elif(pickedOrBanned(pickList,banList,pick1)):
-                print(Fore.YELLOW + "Sorry " +pick1+ " has been picked or banned already" + Style.RESET_ALL)
+            elif(pickedOrBanned(pickList,banList,pick)):
+                print(Fore.YELLOW + "Sorry that champion has been picked or banned already" +Style.RESET_ALL)
                 partition = champTable
-                continue
-            pick1 = partition.Champion.iloc[0]
-            partition = champTable
-            partition = partition[searchTable(champTable,pick2)]
+            else:    
+                pickList.append(pick)               
+        
+        partition = champTable
+        
+        while (len(partition.Champion) != 1):
+            displayPotentialPicks(champTable,pickList,banList,players)
+            pick = input("Please enter your fifth pick: ").capitalize()
+            partition = partition[searchTable(champTable,pick)]
             if(len(partition.Champion) != 1):
-                print(Fore.YELLOW + "Sorry" +pick2+ "is not a champion we recognize" + Style.RESET_ALL)
+                print(Fore.YELLOW+ "Sorry that champion name was not recognized" +Style.RESET_ALL)
                 partition = champTable
-                continue
-            elif(pickedOrBanned(pickList,banList,pick2) or pick2 == pick1):
-                print(Fore.YELLOW + "Sorry " +pick2+ " has been picked or banned already" + Style.RESET_ALL)
+            elif(pickedOrBanned(pickList,banList,pick)):
+                print(Fore.YELLOW + "Sorry that champion has been picked or banned already" +Style.RESET_ALL)
                 partition = champTable
-                continue
-            pickList.append(pick1)
-            pickList.append(pick2)
+            else:    
+                pickList.append(pick)               
         
         partition = champTable
         
@@ -269,38 +262,31 @@ def readPicksPart2(champTable, side, pickList, banList, players):
         
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
-            twoPicksBlue = []
-            while(len(twoPicksBlue) != 2):
-                twoPicksBlue = input("Please enter your fourth and fifth picks (ie Jayce Gangplank): ").split()
-                pick1 = twoPicksBlue[0].capitalize()
-                if(len(twoPicksBlue) != 2):
-                    print(Fore.YELLOW + "Sorry you entered champion in wrong format" + Style.RESET_ALL)
-                    twoPicksBlue = []
-                    continue
-                else:
-                    pick2 = twoPicksBlue[1].capitalize()
-            partition = partition[searchTable(champTable,pick1)]
+            pick = input("Please enter enemy fourth pick: ").capitalize()
+            partition = partition[searchTable(champTable,pick)]
             if(len(partition.Champion) != 1):
-                print(Fore.YELLOW + "Sorry " +pick1+ " is not a champion we recognize" + Style.RESET_ALL)
+                print(Fore.YELLOW+ "Sorry that champion name was not recognized" +Style.RESET_ALL)
                 partition = champTable
-                continue
-            elif(pickedOrBanned(pickList,banList,pick1)):
-                print(Fore.YELLOW + "Sorry " +pick1+ " has been picked or banned already" + Style.RESET_ALL)
+            elif(pickedOrBanned(pickList,banList,pick)):
+                print(Fore.YELLOW + "Sorry that champion has been picked or banned already" +Style.RESET_ALL)
                 partition = champTable
-                continue
-            pick1 = partition.Champion.iloc[0]
-            partition = champTable
-            partition = partition[searchTable(champTable,pick2)]
+            else:    
+                pickList.append(pick)               
+        
+        partition = champTable
+        
+        while (len(partition.Champion) != 1):
+            displayPotentialPicks(champTable,pickList,banList,players)
+            pick = input("Please enter enemy fifth pick: ").capitalize()
+            partition = partition[searchTable(champTable,pick)]
             if(len(partition.Champion) != 1):
-                print(Fore.YELLOW + "Sorry" +pick2+ "is not a champion we recognize" + Style.RESET_ALL)
+                print(Fore.YELLOW+ "Sorry that champion name was not recognized" +Style.RESET_ALL)
                 partition = champTable
-                continue
-            elif(pickedOrBanned(pickList,banList,pick2) or pick2 == pick1):
-                print(Fore.YELLOW + "Sorry " +pick2+ " has been picked or banned already" + Style.RESET_ALL)
+            elif(pickedOrBanned(pickList,banList,pick)):
+                print(Fore.YELLOW + "Sorry that champion has been picked or banned already" +Style.RESET_ALL)
                 partition = champTable
-                continue
-            pickList.append(pick1)
-            pickList.append(pick2)
+            else:    
+                pickList.append(pick)               
         
         partition = champTable
         
@@ -454,75 +440,61 @@ def readPicksPart1(champTable, side, pickList, banList, players):
         
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
-            twoPicksRed = []
-            while(len(twoPicksRed) != 2):
-                twoPicksRed = input("Please enter enemy first and second picks (ie Jayce Gangplank): ").split()
-                pick1 = twoPicksRed[0].capitalize()
-                if(len(twoPicksRed) != 2):
-                    print(Fore.YELLOW + "Sorry you entered champion in wrong format" + Style.RESET_ALL)
-                    twoPicksRed = []
-                    continue
-                else:
-                    pick2 = twoPicksRed[1].capitalize()
-            partition = partition[searchTable(champTable,pick1)]
+            pick = input("Please enter enemy first pick: ").capitalize()
+            partition = partition[searchTable(champTable,pick)]
             if(len(partition.Champion) != 1):
-                print(Fore.YELLOW + "Sorry " +pick1+ " is not a champion we recognize" + Style.RESET_ALL)
+                print(Fore.YELLOW + "Sorry that champion name was not recognized" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            elif(pickedOrBanned(pickList,banList,pick1)):
-                print(Fore.YELLOW + "Sorry " +pick1+ " has been picked or banned already" + Style.RESET_ALL)
+            elif(pickedOrBanned(pickList,banList,pick)):
+                print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            pick1 = partition.Champion.iloc[0]
-            partition = champTable
-            partition = partition[searchTable(champTable,pick2)]
+            else:    
+                pickList.append(partition.Champion.iloc[0])               
+        
+        partition = champTable 
+        
+        while (len(partition.Champion) != 1):
+            displayPotentialPicks(champTable,pickList,banList,players)
+            pick = input("Please enter enemy second pick: ").capitalize()
+            partition = partition[searchTable(champTable,pick)]
             if(len(partition.Champion) != 1):
-                print(Fore.YELLOW + "Sorry " +pick2+ " is not a champion we recognize" + Style.RESET_ALL)
+                print(Fore.YELLOW + "Sorry that champion name was not recognized" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            elif(pickedOrBanned(pickList,banList,pick2) or pick2 == pick1):
-                print(Fore.YELLOW + "Sorry " +pick2+ " has been picked or banned already" + Style.RESET_ALL)
+            elif(pickedOrBanned(pickList,banList,pick)):
+                print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            pickList.append(pick1)
-            pickList.append(partition.Champion.iloc[0])
+            else:    
+                pickList.append(partition.Champion.iloc[0])               
         
         partition = champTable
         
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
-            twoPicksBlue = []
-            while(len(twoPicksBlue) != 2):
-                twoPicksBlue = input("Please enter your second and third picks (ie Jayce Gangplank): ").split()
-                pick1 = twoPicksBlue[0].capitalize()
-                if(len(twoPicksBlue) != 2):
-                    print(Fore.YELLOW + "Sorry you entered champion in wrong format" + Style.RESET_ALL)
-                    twoPicksBlue = []
-                    continue
-                else:
-                    pick2 = twoPicksBlue[1].capitalize()
-            partition = partition[searchTable(champTable,pick1)]
+            pick = input("Please enter your second pick: ").capitalize()
+            partition = partition[searchTable(champTable,pick)]
             if(len(partition.Champion) != 1):
-                print(Fore.YELLOW + "Sorry " +pick1+ " is not a champion we recognize" + Style.RESET_ALL)
+                print(Fore.YELLOW + "Sorry that champion name was not recognized" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            elif(pickedOrBanned(pickList,banList,pick1)):
-                print(Fore.YELLOW + "Sorry " +pick1+ " has been picked or banned already" + Style.RESET_ALL)
+            elif(pickedOrBanned(pickList,banList,pick)):
+                print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            pick1 = partition.Champion.iloc[0]
-            partition = champTable
-            partition = partition[searchTable(champTable,pick2)]
+            else:    
+                pickList.append(partition.Champion.iloc[0])               
+        
+        partition = champTable
+        
+        while (len(partition.Champion) != 1):
+            displayPotentialPicks(champTable,pickList,banList,players)
+            pick = input("Please enter your third pick: ").capitalize()
+            partition = partition[searchTable(champTable,pick)]
             if(len(partition.Champion) != 1):
-                print(Fore.YELLOW + "Sorry " +pick2+ " is not a champion we recognize" + Style.RESET_ALL)
+                print(Fore.YELLOW + "Sorry that champion name was not recognized" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            elif(pickedOrBanned(pickList,banList,pick2) or pick2 == pick1):
-                print(Fore.YELLOW + "Sorry " +pick2+ " has been picked or banned already" + Style.RESET_ALL)
+            elif(pickedOrBanned(pickList,banList,pick)):
+                print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            pickList.append(pick1)
-            pickList.append(partition.Champion.iloc[0])
+            else:    
+                pickList.append(partition.Champion.iloc[0])               
         
         partition = champTable
         
@@ -557,75 +529,61 @@ def readPicksPart1(champTable, side, pickList, banList, players):
         
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
-            twoPicksRed = []
-            while(len(twoPicksRed) != 2):
-                twoPicksRed = input("Please enter your first and second picks (ie Jayce Gangplank): ").split()
-                pick1 = twoPicksRed[0].capitalize()
-                if(len(twoPicksRed) != 2):
-                    print(Fore.YELLOW + "Sorry you entered champion in wrong format" + Style.RESET_ALL)
-                    twoPicksRed = []
-                    continue
-                else:
-                    pick2 = twoPicksRed[1].capitalize()
-            partition = partition[searchTable(champTable,pick1)]
+            pick = input("Please enter your first pick: ").capitalize()
+            partition = partition[searchTable(champTable,pick)]
             if(len(partition.Champion) != 1):
-                print(Fore.YELLOW + "Sorry " +pick1+ " is not a champion we recognize" + Style.RESET_ALL)
+                print(Fore.YELLOW + "Sorry that champion name was not recognized" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            elif(pickedOrBanned(pickList,banList,pick1)):
-                print(Fore.YELLOW + "Sorry " +pick1+ " has been picked or banned already" + Style.RESET_ALL)
+            elif(pickedOrBanned(pickList,banList,pick)):
+                print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            pick1 = partition.Champion.iloc[0]
-            partition = champTable
-            partition = partition[searchTable(champTable,pick2)]
+            else:    
+                pickList.append(partition.Champion.iloc[0])               
+        
+        partition = champTable 
+        
+        while (len(partition.Champion) != 1):
+            displayPotentialPicks(champTable,pickList,banList,players)
+            pick = input("Please enter your second pick: ").capitalize()
+            partition = partition[searchTable(champTable,pick)]
             if(len(partition.Champion) != 1):
-                print(Fore.YELLOW + "Sorry " +pick2+ " is not a champion we recognize" + Style.RESET_ALL)
+                print(Fore.YELLOW + "Sorry that champion name was not recognized" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            elif(pickedOrBanned(pickList,banList,pick2) or pick2 == pick1):
-                print(Fore.YELLOW + "Sorry " +pick2+ " has been picked or banned already" + Style.RESET_ALL)
+            elif(pickedOrBanned(pickList,banList,pick)):
+                print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            pickList.append(pick1)
-            pickList.append(partition.Champion.iloc[0])
+            else:    
+                pickList.append(partition.Champion.iloc[0])               
         
         partition = champTable
         
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
-            twoPicksBlue = []
-            while(len(twoPicksBlue) != 2):
-                twoPicksBlue = input("Please enter enemy second and third picks (ie Jayce Gangplank): ").split()
-                pick1 = twoPicksBlue[0].capitalize()
-                if(len(twoPicksBlue) != 2):
-                    print(Fore.YELLOW + "Sorry you entered champion in wrong format" + Style.RESET_ALL)
-                    twoPicksBlue = []
-                    continue
-                else:
-                    pick2 = twoPicksBlue[1].capitalize()
-            partition = partition[searchTable(champTable,pick1)]
+            pick = input("Please enter enemy second pick: ").capitalize()
+            partition = partition[searchTable(champTable,pick)]
             if(len(partition.Champion) != 1):
-                print(Fore.YELLOW + "Sorry " +pick1+ " is not a champion we recognize" + Style.RESET_ALL)
+                print(Fore.YELLOW + "Sorry that champion name was not recognized" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            elif(pickedOrBanned(pickList,banList,pick1)):
-                print(Fore.YELLOW + "Sorry " +pick1+ " has been picked or banned already" + Style.RESET_ALL)
+            elif(pickedOrBanned(pickList,banList,pick)):
+                print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            pick1 = partition.Champion.iloc[0]
-            partition = champTable
-            partition = partition[searchTable(champTable,pick2)]
+            else:    
+                pickList.append(partition.Champion.iloc[0])               
+        
+        partition = champTable
+        
+        while (len(partition.Champion) != 1):
+            displayPotentialPicks(champTable,pickList,banList,players)
+            pick = input("Please enter enemy third pick: ").capitalize()
+            partition = partition[searchTable(champTable,pick)]
             if(len(partition.Champion) != 1):
-                print(Fore.YELLOW + "Sorry " +pick2+ " is not a champion we recognize" + Style.RESET_ALL)
+                print(Fore.YELLOW + "Sorry that champion name was not recognized" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            elif(pickedOrBanned(pickList,banList,pick2) or pick2 == pick1):
-                print(Fore.YELLOW + "Sorry " +pick2+ " has been picked or banned already" + Style.RESET_ALL)
+            elif(pickedOrBanned(pickList,banList,pick)):
+                print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
-                continue
-            pickList.append(pick1)
-            pickList.append(partition.Champion.iloc[0])
+            else:    
+                pickList.append(partition.Champion.iloc[0])               
         
         partition = champTable
         
@@ -640,7 +598,7 @@ def readPicksPart1(champTable, side, pickList, banList, players):
                 print(Fore.YELLOW + "Sorry that champion has been picked or banned already" + Style.RESET_ALL)
                 partition = champTable
             else:    
-                pickList.append(partition.Champion.iloc[0])  
+                pickList.append(partition.Champion.iloc[0])   
                 
     return pickList
         
