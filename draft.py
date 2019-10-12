@@ -203,9 +203,16 @@ def readPicksPart2(champTable, side, pickList, banList, players):
         
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
-            twoPicksBlue = input("Please enter your fourth and fifth picks (ie Jayce Gangplank): ").split()
-            pick1 = twoPicksBlue[0].capitalize()
-            pick2 = twoPicksBlue[1].capitalize()
+            twoPicksBlue = []
+            while(len(twoPicksBlue) != 2):
+                twoPicksBlue = input("Please enter your fourth and fifth picks (ie Jayce Gangplank): ").split()
+                pick1 = twoPicksBlue[0].capitalize()
+                if(len(twoPicksBlue) != 2):
+                    print(Fore.YELLOW + "Sorry you entered champion in wrong format" + Style.RESET_ALL)
+                    twoPicksBlue = []
+                    continue
+                else:
+                    pick2 = twoPicksBlue[1].capitalize()
             partition = partition[searchTable(champTable,pick1)]
             if(len(partition.Champion) != 1):
                 print(Fore.YELLOW + "Sorry " +pick1+ " is not a champion we recognize" + Style.RESET_ALL)
@@ -262,9 +269,16 @@ def readPicksPart2(champTable, side, pickList, banList, players):
         
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
-            twoPicksBlue = input("Please enter enemy fourth and fifth picks (ie Jayce Gangplank): ").split()
-            pick1 = twoPicksBlue[0].capitalize()
-            pick2 = twoPicksBlue[1].capitalize()
+            twoPicksBlue = []
+            while(len(twoPicksBlue) != 2):
+                twoPicksBlue = input("Please enter your fourth and fifth picks (ie Jayce Gangplank): ").split()
+                pick1 = twoPicksBlue[0].capitalize()
+                if(len(twoPicksBlue) != 2):
+                    print(Fore.YELLOW + "Sorry you entered champion in wrong format" + Style.RESET_ALL)
+                    twoPicksBlue = []
+                    continue
+                else:
+                    pick2 = twoPicksBlue[1].capitalize()
             partition = partition[searchTable(champTable,pick1)]
             if(len(partition.Champion) != 1):
                 print(Fore.YELLOW + "Sorry " +pick1+ " is not a champion we recognize" + Style.RESET_ALL)
@@ -440,9 +454,16 @@ def readPicksPart1(champTable, side, pickList, banList, players):
         
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
-            twoPicksRed = input("Please enter enemy first and second picks (ie Jayce Gangplank): ").split()
-            pick1 = twoPicksRed[0].capitalize()
-            pick2 = twoPicksRed[1].capitalize()
+            twoPicksRed = []
+            while(len(twoPicksRed) != 2):
+                twoPicksRed = input("Please enter enemy first and second picks (ie Jayce Gangplank): ").split()
+                pick1 = twoPicksRed[0].capitalize()
+                if(len(twoPicksRed) != 2):
+                    print(Fore.YELLOW + "Sorry you entered champion in wrong format" + Style.RESET_ALL)
+                    twoPicksRed = []
+                    continue
+                else:
+                    pick2 = twoPicksRed[1].capitalize()
             partition = partition[searchTable(champTable,pick1)]
             if(len(partition.Champion) != 1):
                 print(Fore.YELLOW + "Sorry " +pick1+ " is not a champion we recognize" + Style.RESET_ALL)
@@ -470,9 +491,16 @@ def readPicksPart1(champTable, side, pickList, banList, players):
         
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
-            twoPicksBlue = input("Please enter your second and third picks (ie Jayce Gangplank): ").split()
-            pick1 = twoPicksBlue[0].capitalize()
-            pick2 = twoPicksBlue[1].capitalize()
+            twoPicksBlue = []
+            while(len(twoPicksBlue) != 2):
+                twoPicksBlue = input("Please enter your second and third picks (ie Jayce Gangplank): ").split()
+                pick1 = twoPicksBlue[0].capitalize()
+                if(len(twoPicksBlue) != 2):
+                    print(Fore.YELLOW + "Sorry you entered champion in wrong format" + Style.RESET_ALL)
+                    twoPicksBlue = []
+                    continue
+                else:
+                    pick2 = twoPicksBlue[1].capitalize()
             partition = partition[searchTable(champTable,pick1)]
             if(len(partition.Champion) != 1):
                 print(Fore.YELLOW + "Sorry " +pick1+ " is not a champion we recognize" + Style.RESET_ALL)
@@ -529,9 +557,16 @@ def readPicksPart1(champTable, side, pickList, banList, players):
         
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
-            twoPicksRed = input("Please enter your first and second picks (ie Jayce Gangplank): ").split()
-            pick1 = twoPicksRed[0].capitalize()
-            pick2 = twoPicksRed[1].capitalize()
+            twoPicksRed = []
+            while(len(twoPicksRed) != 2):
+                twoPicksRed = input("Please enter your first and second picks (ie Jayce Gangplank): ").split()
+                pick1 = twoPicksRed[0].capitalize()
+                if(len(twoPicksRed) != 2):
+                    print(Fore.YELLOW + "Sorry you entered champion in wrong format" + Style.RESET_ALL)
+                    twoPicksRed = []
+                    continue
+                else:
+                    pick2 = twoPicksRed[1].capitalize()
             partition = partition[searchTable(champTable,pick1)]
             if(len(partition.Champion) != 1):
                 print(Fore.YELLOW + "Sorry " +pick1+ " is not a champion we recognize" + Style.RESET_ALL)
@@ -559,9 +594,16 @@ def readPicksPart1(champTable, side, pickList, banList, players):
         
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
-            twoPicksBlue = input("Please enter enemy second and third picks (ie Jayce Gangplank): ").split()
-            pick1 = twoPicksBlue[0].capitalize()
-            pick2 = twoPicksBlue[1].capitalize()
+            twoPicksBlue = []
+            while(len(twoPicksBlue) != 2):
+                twoPicksBlue = input("Please enter enemy second and third picks (ie Jayce Gangplank): ").split()
+                pick1 = twoPicksBlue[0].capitalize()
+                if(len(twoPicksBlue) != 2):
+                    print(Fore.YELLOW + "Sorry you entered champion in wrong format" + Style.RESET_ALL)
+                    twoPicksBlue = []
+                    continue
+                else:
+                    pick2 = twoPicksBlue[1].capitalize()
             partition = partition[searchTable(champTable,pick1)]
             if(len(partition.Champion) != 1):
                 print(Fore.YELLOW + "Sorry " +pick1+ " is not a champion we recognize" + Style.RESET_ALL)
