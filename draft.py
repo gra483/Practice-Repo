@@ -5,7 +5,7 @@ Created on Tue Oct  8 17:05:39 2019
 @author: gavin
 """
 
-import Champion
+
 from difflib import SequenceMatcher  
 from colorama import Fore
 from colorama import Style
@@ -438,8 +438,6 @@ def readBansPart2(champTable, side, pickList, banList):
 
 def readPicksPart1(champTable, side, pickList, banList, players):
     partition = champTable
-    allyPickList = []
-    enemyPickList = []
     if (side == "Blue"):
         while (len(partition.Champion) != 1):
             displayPotentialPicks(champTable,pickList,banList,players)
@@ -814,354 +812,160 @@ def readSide():
 def readPlayers(champTable):
     players = []
     names = []
-    while (len(names) != 1):
-        playerToAdd = input("Please enter your top laner's name(ie Andy): ")
-        names = searchPlayer(champTable, playerToAdd)
-        if(len(names)!=1):
-            print(Fore.YELLOW + "Sorry we do not have that player in our database" + Style.RESET_ALL)
-            names = []
-        else:
-            players.append(names[0])
-            
-    names = []
-    
-    while (len(names) != 1):
-        playerToAdd = input("Please enter your jungler's name(ie Jonathan): ")
-        names = searchPlayer(champTable, playerToAdd)
-        if(len(names)!=1):
-            print(Fore.YELLOW + "Sorry we do not have that player in our database" + Style.RESET_ALL)
-            names = []
-        else:
-            players.append(names[0])
-            
-    names = []
-    
-    while (len(names) != 1):
-        playerToAdd = input("Please enter mid laner's name(ie Dustin): ")
-        names = searchPlayer(champTable, playerToAdd)
-        if(len(names)!=1):
-            print(Fore.YELLOW + "Sorry we do not have that player in our database" + Style.RESET_ALL)
-            names = []
-        else:
-            players.append(names[0])
-            
-    names = []
-    
-    while (len(names) != 1):
-        playerToAdd = input("Please enter your bot laner's name(ie Mason): ")
-        names = searchPlayer(champTable, playerToAdd)
-        if(len(names)!=1):
-            print(Fore.YELLOW + "Sorry we do not have that player in our database" + Style.RESET_ALL)
-            names = []
-        else:
-            players.append(names[0])
-            
-    names = []
-    
-    while (len(names) != 1):
-        playerToAdd = input("Please enter your support's name(ie Hwang): ")
-        names = searchPlayer(champTable, playerToAdd)
-        if(len(names)!=1):
-            print(Fore.YELLOW + "Sorry we do not have that player in our database" + Style.RESET_ALL)
-            names = []
-        else:
-            players.append(names[0])
+    preSet = ""
+    role = "1"
+    while(not(preSet == "A" or preSet == "B" or preSet == "C" or preSet == "U" or preSet == "a" or preSet == "b" or preSet == "c" or preSet == "u") ):
+        preSet = input("What team is playing? A for Premier, B for Academy, C for Ice Cream, U for unique (You can pick a preset then choose subs too): " )
+        if(not(preSet == "A" or preSet == "B" or preSet == "C" or preSet == "U" or preSet == "a" or preSet == "b" or preSet == "c" or preSet == "u") ):
+            print(Fore.YELLOW + "Sorry we do not recognize that team" + Style.RESET_ALL)
+
+    if(preSet == "A" or preSet == "a"):
+        names = ["Andy", "Jonathan", "Dustin", "Mason", "Hwang"]
+        while(1):
+            indicator = input("Will anybody else be subbing in? If not, type done, otherwise type anything (note Jan is considered a Sub): ")
+            if(indicator == "done" or indicator == "Done"):
+                return names
+            else:
+                playerToAdd = input("Please enter the name of the player subbing: ")
+                namesHelp = searchPlayer(champTable, playerToAdd)
+                if(len(namesHelp)!=1):
+                    print(Fore.YELLOW + "Sorry we do not have that player in our database" + Style.RESET_ALL)
+                    namesHelp = []
+                else:
+                    while(1):
+                        role = input("What role will " + namesHelp[0] + " be playing? 1 for top, 2 for jungle.... 5 for support: ")
+                        if("1" in role):
+                            names[0] = namesHelp[0]
+                            break
+                        elif("2" in role):
+                            names[1] = namesHelp[0]
+                            break
+                        elif("3" in role):
+                            names[2] = namesHelp[0]
+                            break
+                        elif("4" in role):
+                            names[3] = namesHelp[0]
+                            break
+                        elif("5" in role):
+                            names[4] = namesHelp[0]
+                            break
+                        else:
+                            print("We do not recognize that role")
+    elif(preSet == "B" or preSet == "b"):
+        names = ["Kevin", "Denis", "Ben", "Tailer", "Tanner"]
+        while(1):
+            indicator = input("Will anybody else be subbing in? If not, type done, otherwise type anything: ")
+            if(indicator == "done" or indicator == "Done"):
+                return names
+            else:
+                playerToAdd = input("Please enter the name of the player subbing: ")
+                namesHelp = searchPlayer(champTable, playerToAdd)
+                if(len(namesHelp)!=1):
+                    print(Fore.YELLOW + "Sorry we do not have that player in our database" + Style.RESET_ALL)
+                    namesHelp = []
+                else:
+                    while(1):
+                        role = input("What role will " + namesHelp[0] + " be playing? 1 for top, 2 for jungle.... 5 for support: ")
+                        if("1" in role):
+                            names[0] = namesHelp[0]
+                            break
+                        elif("2" in role):
+                            names[1] = namesHelp[0]
+                            break
+                        elif("3" in role):
+                            names[2] = namesHelp[0]
+                            break
+                        elif("4" in role):
+                            names[3] = namesHelp[0]
+                            break
+                        elif("5" in role):
+                            names[4] = namesHelp[0]
+                            break
+                        else:
+                            print("We do not recognize that role")
+    elif(preSet == "C" or preSet == "c"):
+        names = ["Clayton", "Praveen", "Alex", "Micheal", "Lim"]
+        while(1):
+            indicator = input("Will anybody else be subbing in? If not, type done, otherwise type anything: ")
+            if(indicator == "done" or indicator == "Done"):
+                return names
+            else:
+                playerToAdd = input("Please enter the name of the player subbing: ")
+                namesHelp = searchPlayer(champTable, playerToAdd)
+                if(len(namesHelp)!=1):
+                    print(Fore.YELLOW + "Sorry we do not have that player in our database" + Style.RESET_ALL)
+                    namesHelp = []
+                else:
+                    while(1):
+                        role = input("What role will " + namesHelp[0] + " be playing? 1 for top, 2 for jungle.... 5 for support: ")
+                        if("1" in role):
+                            names[0] = namesHelp[0]
+                            break
+                        elif("2" in role):
+                            names[1] = namesHelp[0]
+                            break
+                        elif("3" in role):
+                            names[2] = namesHelp[0]
+                            break
+                        elif("4" in role):
+                            names[3] = namesHelp[0]
+                            break
+                        elif("5" in role):
+                            names[4] = namesHelp[0]
+                            break
+                        else:
+                            print("We do not recognize that role")
+    elif(preSet == "U" or preSet == "u"):
+        while (len(names) != 1):
+            playerToAdd = input("Please enter your top laner's name(ie Andy): ")
+            names = searchPlayer(champTable, playerToAdd)
+            if(len(names)!=1):
+                print(Fore.YELLOW + "Sorry we do not have that player in our database" + Style.RESET_ALL)
+                names = []
+            else:
+                players.append(names[0])
+        names = []
+        
+        while (len(names) != 1):
+            playerToAdd = input("Please enter your jungler's name(ie Jonathan): ")
+            names = searchPlayer(champTable, playerToAdd)
+            if(len(names)!=1):
+                print(Fore.YELLOW + "Sorry we do not have that player in our database" + Style.RESET_ALL)
+                names = []
+            else:
+                players.append(names[0])
+                
+        names = []
+        
+        while (len(names) != 1):
+            playerToAdd = input("Please enter mid laner's name(ie Dustin): ")
+            names = searchPlayer(champTable, playerToAdd)
+            if(len(names)!=1):
+                print(Fore.YELLOW + "Sorry we do not have that player in our database" + Style.RESET_ALL)
+                names = []
+            else:
+                players.append(names[0])
+                
+        names = []
+        
+        while (len(names) != 1):
+            playerToAdd = input("Please enter your bot laner's name(ie Mason): ")
+            names = searchPlayer(champTable, playerToAdd)
+            if(len(names)!=1):
+                print(Fore.YELLOW + "Sorry we do not have that player in our database" + Style.RESET_ALL)
+                names = []
+            else:
+                players.append(names[0])
+                
+        names = []
+        
+        while (len(names) != 1):
+            playerToAdd = input("Please enter your support's name(ie Hwang): ")
+            names = searchPlayer(champTable, playerToAdd)
+            if(len(names)!=1):
+                print(Fore.YELLOW + "Sorry we do not have that player in our database" + Style.RESET_ALL)
+                names = []
+            else:
+                players.append(names[0])
             
     return players
-
-def buildChampionList():
-    championList = []
-    aatrox = Champion.Champion("Aatrox", "Top")
-    championList.append(aatrox)
-    ahri = Champion.Champion("Ahri", "Mid")
-    championList.append(ahri)
-    akali = Champion.Champion("Akali","Mid")
-    championList.append(akali)
-    alistar = Champion.Champion("Alistar","Support")
-    championList.append(alistar)
-    amumu = Champion.Champion("Amumu","Jungle")
-    championList.append(amumu)
-    anivia = Champion.Champion("Anivia","Mid")
-    championList.append(anivia)
-    annie = Champion.Champion("Annie","Mid")
-    championList.append(annie)
-    ashe = Champion.Champion("Ashe","ADC")
-    championList.append(ashe)
-    aurelianSol = Champion.Champion("Aurelian Sol", "Mid")
-    championList.append(aurelianSol)
-    azir = Champion.Champion("Azir","Mid")
-    championList.append(azir)
-    bard = Champion.Champion("Bard","Support")
-    championList.append(bard)
-    blitzcrank = Champion.Champion("Blitzcrank","Support")
-    championList.append(blitzcrank)
-    brand = Champion.Champion("Brand","Support")
-    championList.append(brand)
-    braum = Champion.Champion("Braum","Support")
-    championList.append(braum)
-    caitlyn = Champion.Champion("Caitlyn","ADC")
-    championList.append(caitlyn)
-    camille = Champion.Champion("Camille","Top")
-    championList.append(camille)
-    cassiopeia = Champion.Champion("Cassiopeia","Mid")
-    championList.append(cassiopeia)
-    chogath = Champion.Champion("Chogath","Top")
-    championList.append(chogath)
-    corki = Champion.Champion("Corki","Mid")
-    championList.append(corki)
-    darius = Champion.Champion("Darius","Top")
-    championList.append(darius)
-    diana = Champion.Champion("Diana","Mid")
-    championList.append(diana)
-    drMundo = Champion.Champion("DrMundo","Top")
-    championList.append(drMundo)
-    draven = Champion.Champion("Draven","ADC")
-    championList.append(draven)
-    ekko = Champion.Champion("Ekko", "Mid")
-    championList.append(ekko)
-    elise = Champion.Champion("Elise","Jungle")
-    championList.append(elise)
-    evelynn = Champion.Champion("Evelynn","Jungle")
-    championList.append(evelynn)
-    ezreal = Champion.Champion("Ezreal","ADC")
-    championList.append(ezreal)
-    fiddlesticks = Champion.Champion("Fiddlesticks", "Jungle")
-    championList.append(fiddlesticks)
-    fiora = Champion.Champion("Fiora", "Top")
-    championList.append(fiora)
-    fizz = Champion.Champion("Fizz","Mid")
-    championList.append(fizz)
-    galio = Champion.Champion("Galio", "Mid")
-    championList.append(galio)
-    gangplank = Champion.Champion("Gangplank", "Top")
-    championList.append(gangplank)
-    garen = Champion.Champion("Garen", "Top")
-    championList.append(garen)
-    gnar = Champion.Champion("Gnar", "Top")
-    championList.append(gnar)
-    gragas = Champion.Champion("Gragas", "Jungle")
-    championList.append(gragas)
-    graves = Champion.Champion("Graves","Jungle")
-    championList.append(graves)
-    hecarim = Champion.Champion("Hecarim","Jungle")
-    championList.append(hecarim)
-    heimerdinger = Champion.Champion("Heimerdinger","Mid")
-    championList.append(heimerdinger)
-    illaoi = Champion.Champion("Illaoi", "Top")
-    championList.append(illaoi)
-    irelia = Champion.Champion("Irelia","Top")
-    championList.append(irelia)
-    ivern = Champion.Champion("Ivern","Jungle")
-    championList.append(ivern)
-    janna = Champion.Champion("Janna","Support")
-    championList.append(janna)
-    jarvanIV = Champion.Champion("Jarvan IV", "Jungle")
-    championList.append(jarvanIV)
-    jax = Champion.Champion("Jax","Top")
-    championList.append(jax)
-    jayce = Champion.Champion("Jayce","Top")
-    championList.append(jayce)
-    jhin = Champion.Champion("Jhin","ADC")
-    championList.append(jhin)
-    jinx = Champion.Champion("Jinx","ADC")
-    championList.append(jinx)
-    kaisa = Champion.Champion("Kaisa","ADC")
-    championList.append(kaisa)
-    kalista = Champion.Champion("Kalista","ADC")
-    championList.append(kalista)
-    karma = Champion.Champion("Karma","Support")
-    championList.append(karma)
-    karthus = Champion.Champion("Karthus","Jungle")
-    championList.append(karthus)
-    kassadin = Champion.Champion("Kassadin","Mid")
-    championList.append(kassadin)
-    katarina = Champion.Champion("Katarina","Mid")
-    championList.append(katarina)
-    kayle = Champion.Champion("Kayle","Top")
-    championList.append(kayle)
-    kayn = Champion.Champion("Kayn","Jungle")
-    championList.append(kayn)
-    kennen = Champion.Champion("Kennen","Top")
-    championList.append(kennen)
-    khazix = Champion.Champion("Khazix","Jungle")
-    championList.append(khazix)
-    kindred = Champion.Champion("Kindred","Jungle")
-    championList.append(kindred)
-    kled = Champion.Champion("Kled", "Top")
-    championList.append(kled)
-    kogmaw = Champion.Champion("Kogmaw","ADC")
-    championList.append(kogmaw)
-    leblanc = Champion.Champion("LeBlanc", "Mid")
-    championList.append(leblanc)
-    leesin = Champion.Champion("Lee Sin", "Jungle")
-    championList.append(leesin)
-    leona = Champion.Champion("Leona","Support")
-    championList.append(leona)
-    lissandra = Champion.Champion("Lissandra", "Mid")
-    championList.append(lissandra)
-    lucian = Champion.Champion("Lucian", "ADC")
-    championList.append(lucian)
-    lulu = Champion.Champion("Lulu", "Support")
-    championList.append(lulu)
-    lux = Champion.Champion("Lux","Support")
-    championList.append(lux)
-    malphite = Champion.Champion("Malphite","Top")
-    championList.append(malphite)
-    malzahar = Champion.Champion("Malzahar", "Mid")
-    championList.append(malzahar)
-    maokai = Champion.Champion("Maokai","Top")
-    championList.append(maokai)
-    masterYi = Champion.Champion("Master Yi", "Jungle")
-    championList.append(masterYi)
-    missFortune = Champion.Champion("Miss Fortune","ADC")
-    championList.append(missFortune)
-    mordekaiser = Champion.Champion("Mordekaiser", "Top")
-    championList.append(mordekaiser)
-    morgana = Champion.Champion("Morgana","Support")
-    championList.append(morgana)
-    nami = Champion.Champion("Nami", "Support")
-    championList.append(nami)
-    nasus = Champion.Champion("Nasus", "Top")
-    championList.append(nasus)
-    nautilus = Champion.Champion("Nautilus", "Support")
-    championList.append(nautilus)
-    neeko = Champion.Champion("Neeko","Mid")
-    championList.append(neeko)
-    nidalee = Champion.Champion("Nidalee","Jungle")
-    championList.append(nidalee)
-    nocturne = Champion.Champion("Nocturne","Jungle")
-    championList.append(nocturne)
-    nunu = Champion.Champion("Nunu", "Jungle")
-    championList.append(nunu)
-    olaf = Champion.Champion("Olaf", "Jungle")
-    championList.append(olaf)
-    orianna = Champion.Champion("Orianna", "Mid")
-    championList.append(orianna)
-    ornn = Champion.Champion("Ornn", "Top")
-    championList.append(ornn)
-    pantheon = Champion.Champion("Pantheon","Top")
-    championList.append(pantheon)
-    poppy = Champion.Champion("Poppy", "Top")
-    championList.append(poppy)
-    pyke = Champion.Champion("Pyke","Support")
-    championList.append(pyke)
-    qiyana = Champion.Champion("Qiyana", "Mid")
-    championList.append(qiyana)
-    quinn = Champion.Champion("Quinn", "Top")
-    championList.append(quinn)
-    rakan = Champion.Champion("Rakan", "Support")
-    championList.append(rakan)
-    rammus = Champion.Champion("Rammus", "Jungle")
-    championList.append(rammus)
-    reksai = Champion.Champion("Reksai", "Jungle")
-    championList.append(reksai)
-    renekton = Champion.Champion("Renekton","Top")
-    championList.append(renekton)
-    rengar = Champion.Champion("Rengar", "Jungle")
-    championList.append(rengar)
-    riven = Champion.Champion("Riven", "Top")
-    championList.append(riven)
-    rumble = Champion.Champion("Rumble", "Top")
-    championList.append(rumble)
-    ryze = Champion.Champion("Ryze", "Mid")
-    championList.append(ryze)
-    sejuani = Champion.Champion("Sejuani", "Jungle")
-    championList.append(sejuani)
-    shaco = Champion.Champion("Shaco", "Jungle")
-    championList.append(shaco)
-    shen = Champion.Champion("Shen", "Top")
-    championList.append(shen)
-    shyvana = Champion.Champion("Shyvana", "Jungle")
-    championList.append(shyvana)
-    singed = Champion.Champion("Singed", "Top")
-    championList.append(singed)
-    sion = Champion.Champion("Sion", "Top")
-    championList.append(sion)
-    sivir = Champion.Champion("Sivir", "ADC")
-    championList.append(sivir)
-    skarner = Champion.Champion("Skarner", "Jungle")
-    championList.append(skarner)
-    sona = Champion.Champion("Sona", "Support")
-    championList.append(sona)
-    soraka = Champion.Champion("Soraka","Support")
-    championList.append(soraka)
-    swain = Champion.Champion("Swain", "Mid")
-    championList.append(swain)
-    sylas = Champion.Champion("Sylas", "Mid")
-    championList.append(sylas)
-    syndra = Champion.Champion("Syndra", "Mid")
-    championList.append(syndra)
-    tahmKench = Champion.Champion("Tahm Kench", "Support")
-    championList.append(tahmKench)
-    taliyah = Champion.Champion("Taliyah", "Mid")
-    championList.append(taliyah)
-    talon = Champion.Champion("Talon", "Mid")
-    championList.append(talon)
-    taric = Champion.Champion("Taric", "Support")
-    championList.append(taric)
-    teemo = Champion.Champion("Teemo", "Top")
-    championList.append(teemo)
-    thresh = Champion.Champion("Thresh", "Support")
-    championList.append(thresh)
-    tristana = Champion.Champion("Tristana", "ADC")
-    championList.append(tristana)
-    trundle = Champion.Champion("Trundle", "Jungle")
-    championList.append(trundle)
-    tryndamere = Champion.Champion("Tryndamere", "Top")
-    championList.append(tryndamere)
-    twistedFate = Champion.Champion("Twisted Fate", "Mid")
-    championList.append(twistedFate)
-    twitch = Champion.Champion("Twitch", "ADC")
-    championList.append(twitch)
-    udyr = Champion.Champion("Udyr", "Jungle")
-    championList.append(udyr)
-    urgot = Champion.Champion("Urgot", "Top")
-    championList.append(urgot)
-    varus = Champion.Champion("Varus", "ADC")
-    championList.append(varus)
-    vayne = Champion.Champion("Vayne", "ADC")
-    championList.append(vayne)
-    veigar = Champion.Champion("Veigar", "Mid")
-    championList.append(veigar)
-    velkoz = Champion.Champion("Velkoz", "Mid")
-    championList.append(velkoz)
-    vi = Champion.Champion("Vi", "Jungle")
-    championList.append(vi)
-    viktor = Champion.Champion("Viktor", "Mid")
-    championList.append(viktor)
-    vladimir = Champion.Champion("Vladimir", "Mid")
-    championList.append(vladimir)
-    volibear = Champion.Champion("Volibear", "Jungle")
-    championList.append(volibear)
-    warwick = Champion.Champion("Warwick", "Jungle")
-    championList.append(warwick)
-    wukong = Champion.Champion("Wukong", "Top")
-    championList.append(wukong)
-    xayah = Champion.Champion("Xayah", "ADC")
-    championList.append(xayah)
-    xerath = Champion.Champion("Xerath", "Mid")
-    championList.append(xerath)
-    xin = Champion.Champion("Xin Zhao", "Jungle")
-    championList.append(xin)
-    yasuo = Champion.Champion("Yasuo", "Mid")
-    championList.append(yasuo)
-    yorick = Champion.Champion("Yorick", "Top")
-    championList.append(yorick)
-    yuumi = Champion.Champion("Yuumi", "Support")
-    championList.append(yuumi)
-    zac = Champion.Champion("Zac", "Jungle")
-    championList.append(zac)
-    zed = Champion.Champion("Zed", "Mid")
-    championList.append(zed)
-    ziggs = Champion.Champion("Ziggs", "Mid")
-    championList.append(ziggs)
-    zilean = Champion.Champion("Zilean", "Support")
-    championList.append(zilean)
-    zoe = Champion.Champion("Zoe", "Mid")
-    championList.append(zoe)
-    zyra = Champion.Champion("Zyra", "Support")
-    championList.append(zyra)
-    championDict = {}
-    for x in championList:
-        championDict[x.name] = x
-    return championDict
