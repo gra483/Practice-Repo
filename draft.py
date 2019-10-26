@@ -42,7 +42,9 @@ def printPlayer(players, playerIndex, availableS, availableA, availableB, allPic
 
         
 def displayPotentialPicks(champTable, pickList, banList, players):
-    champFilter = champTable.Champion.str.contains('|'.join(pickList[0] + pickList[1] +banList))
+    pickList = [[],[]]
+    banList = ["Annie", "Zed", "Garen", "Kayle", "Reksai", "Tahm Kench"]
+    champFilter = champTable.Champion.str.contains('|'.join(pickList[0] + pickList[1] + banList))
     potentialPicks = champTable[[not x for x in champFilter]]
     
     poolP1 = champTable[champTable[players[0]]<4]
@@ -77,7 +79,7 @@ def displayPotentialPicks(champTable, pickList, banList, players):
        
 
    #really just a bunch of print statements to print each players picks, highlighted if flex
-   #pprobably would have been faster to get a list of flex picks first, but I just checked every time b/c it works
+   #probably would have been faster to get a list of flex picks first, but I just checked every time b/c it works
      
     print()
     print()
