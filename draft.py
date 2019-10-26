@@ -42,8 +42,6 @@ def printPlayer(players, playerIndex, availableS, availableA, availableB, allPic
 
         
 def displayPotentialPicks(champTable, pickList, banList, players):
-    pickList = [[],[]]
-    banList = ["Annie", "Zed", "Garen", "Kayle", "Reksai", "Tahm Kench"]
     champFilter = champTable.Champion.str.contains('|'.join(pickList[0] + pickList[1] + banList))
     potentialPicks = champTable[[not x for x in champFilter]]
     
@@ -375,11 +373,11 @@ def readPlayers(champTable):
             print(Fore.YELLOW + "Sorry we do not recognize that team" + Style.RESET_ALL)
 
     if(preSet == "A" or preSet == "a"):
-        names = ["Andy", "Jonathan", "Dustin", "Mason", "Hwang"]
+        names = ["Andy", "Denis", "Dustin", "Mason", "Hwang"]
         players = getSubs(names, champTable)
         
     elif(preSet == "B" or preSet == "b"):
-        names = ["Kevin", "Denis", "Ben", "Tailer", "Tanner"]
+        names = ["Kevin", "Jonathan", "Ben", "Tailer", "Tanner"]
         players = getSubs(names, champTable)
         
     elif(preSet == "C" or preSet == "c"):
